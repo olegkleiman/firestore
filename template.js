@@ -1,4 +1,4 @@
-export default ({content, state, style}) => {
+export default ({content, state}) => {
   return `
       <!DOCTYPE html>
       <html lang="he">
@@ -7,9 +7,7 @@ export default ({content, state, style}) => {
         <title>תל אביב-יפו TLV OpenData</title>
         <link rel='icon' type='image/x-icon' href='../favicon.ico' />
         <link rel='shortcut icon' href='../favicon.ico' />
-        <style type='text/css'>
-          ${style}
-        </style>
+        <link href='styles.css' rel='stylesheet'></style>
        </head>
       <body>
         <div id="app">${content}</div>
