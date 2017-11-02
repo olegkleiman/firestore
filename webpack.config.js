@@ -1,4 +1,5 @@
 var path = require('path');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 var cssName = process.env.NODE_ENV === 'production' ? 'styles-[hash].css' : 'styles.css';
 
@@ -22,21 +23,18 @@ var config = {
     loaders: [
       {
         test: /\.jsx$/,
-        loader: 'babel-loader'
+        loader: 'babel-loader',
+        exclude: /node_modules/
       },
       {
         test: /\.css$/,
-        use: [
-          { loader: 'style-loader' },
-          { loader: 'css-loader',
-             options: {
-               modules: true,
-               importLoaders: 1,
-               localIdentName: '[name]__[local]___[hash:base64:5]'
-             }
-          }
-        ],
-        exclude: /node_modules/
+         loader: ExtractTextPlugin.extract({
+              loader: 'css-loader',
+              query: {
+                localIdentName: '[name]__[local]___[hash:base64:5]',
+                modules: true
+              }
+            })
       },
       { test: /\.(woff|woff2|ttt|eot|otf)/, loader: 'url-loader?limit=1' },
       { test: /\.png/, loader: 'url-loader?limit=10000&mimetype=image/png' },
@@ -45,7 +43,13 @@ var config = {
   },
   devServer: {
       headers: { 'Access-Control-Origin': '*'}
-  }
+  },
+  plugins: [
+    new ExtractTextPlugin({
+      filename: 'styles.css',
+      allChunks: true
+    })
+  ]
 
 };
 
