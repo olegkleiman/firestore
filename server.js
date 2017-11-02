@@ -1,5 +1,6 @@
 import express          from 'express';
 import path             from 'path';
+import fs               from 'fs';
 
 import React            from 'react';
 import ReactDomServer   from 'react-dom/server';
@@ -70,6 +71,25 @@ function initMarkers(markers) {
   }
 };
 
+console.log('Reading CSS');
+let style = {};
+
+const cssPath = './assets/styles.css';
+if( fs.existsSync(cssPath) ) {
+  fs.readFile(cssPath, 'utf8', function(err, data){
+
+    style = data.toString();
+
+    if( err ) {
+      console.log('Error: ' + err);
+    } else {
+      console.log('CSS: ' + style);
+    }
+  });
+} else {
+  console.log('No CSS file found at ' + cssPath);
+}
+
 app.get('/favicon.ico', (req, res) => {
   res.sendFile(path.join(__dirname + '/favicon.ico'));
 });
@@ -85,7 +105,6 @@ app.get('/fonts/BlenderLight.oft', (req, res) => {
   res.sendFile(path.join(__dirname + '/fonts/BlenderLight.oft'));
 })
 
-//app.use(handleRender);
 app.get('*', handleRender);
 
 function handleRender(req, res) {
@@ -106,7 +125,8 @@ function handleRender(req, res) {
   // res.sendFile(__dirname + '/index.html');
   const html = template({
     content: componentHTML,
-    state: preloadedState
+    state: preloadedState,
+    style: style
   });
   res.status(200).send(html);
   //res.end(renderHTML(componentHTML, preloadedState));
