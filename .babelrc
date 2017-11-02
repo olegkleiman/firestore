@@ -8,8 +8,7 @@
         "plugins": [
           [
             "css-modules-transform", {
-              "extractCss": "./assets/styles.css",
-              "extensions": [".css", ".scss", ".less"],
+              "extensions": [".css", ".scss"],
               "devMode": true
             }
           ]
