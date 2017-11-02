@@ -71,25 +71,31 @@ function initMarkers(markers) {
   }
 };
 
-console.log('Reading CSS');
-let style = {};
+// console.log('Reading CSS');
+// let style = {};
+//
+// const cssPath = './assets/styles.css';
+// if( fs.existsSync(cssPath) ) {
+//   fs.readFile(cssPath, 'utf8', function(err, data){
+//
+//     style = data.toString();
+//
+//     if( err ) {
+//       console.log('Error: ' + err);
+//     } else {
+//       console.log('CSS: ' + style);
+//     }
+//   });
+// } else {
+//   console.log('No CSS file found at ' + cssPath);
+// }
 
-const cssPath = './assets/styles.css';
-if( fs.existsSync(cssPath) ) {
-  fs.readFile(cssPath, 'utf8', function(err, data){
-
-    style = data.toString();
-
-    if( err ) {
-      console.log('Error: ' + err);
-    } else {
-      console.log('CSS: ' + style);
-    }
-  });
-} else {
-  console.log('No CSS file found at ' + cssPath);
-}
-
+app.get('/styles.css', (req, res) => {
+  res.sendFile(__dirname + '/assets/styles.css');
+});
+app.get('/images/city-full-banner.png', (req, res) => {
+  res.sendFile(__dirname + '/images/city-full-banner.png')
+});
 app.get('/favicon.ico', (req, res) => {
   res.sendFile(path.join(__dirname + '/favicon.ico'));
 });
@@ -109,7 +115,7 @@ app.get('*', handleRender);
 
 function handleRender(req, res) {
 
-  console.log('Handler. Url: ' + req.url);
+//  console.log('Handler. Url: ' + req.url);
 
   const store = createStore(reducers);
 
@@ -126,7 +132,6 @@ function handleRender(req, res) {
   const html = template({
     content: componentHTML,
     state: preloadedState,
-    style: style
   });
   res.status(200).send(html);
   //res.end(renderHTML(componentHTML, preloadedState));
