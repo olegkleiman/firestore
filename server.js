@@ -12,6 +12,14 @@ import admin            from 'firebase-admin';
 import { match, RouterContext } from 'react-router';
 import routes from './routes.jsx';
 
+import { addLocaleData, IntlProvider } from 'react-intl';
+import en from 'react-intl/locale-data/en';
+import he from 'react-intl/locale-data/he';
+
+import localeData from './assets/messages/messages.json';
+
+addLocaleData([...en, ...he]);
+
 import template         from './template.js';
 import reducers         from './reducers.jsx';
 import App              from './js/App';
@@ -31,7 +39,7 @@ admin.initializeApp({
 var db = admin.firestore();
 
 const categories = [];
-const highlights = [];
+const markers = [];
 
 console.log('Getting data from Firestore');
 
@@ -45,7 +53,7 @@ Promise.all([p1,p2])
     });
 
     values[1].forEach( (doc) => {
-      highlights.push(doc.data());
+      markers.push(doc.data());
     });
 
     app.listen(PORT, () => {
@@ -67,7 +75,7 @@ function initCategories(categories) {
 function initMarkers(markers) {
   return {
     type: 'MARKERS_INIT',
-    data: highlights
+    data: markers
   }
 };
 
@@ -99,9 +107,6 @@ app.get('/images/city-full-banner.png', (req, res) => {
 app.get('/favicon.ico', (req, res) => {
   res.sendFile(path.join(__dirname + '/favicon.ico'));
 });
-app.get('/css/ods.css', (req, res) => {
-  res.sendFile(path.join(__dirname + '/css/ods.css' ))
-});
 app.get('/fonts/BlenderRegular.oft', (req, res) => {
   console.log('Font requested');
   res.sendFile(path.join(__dirname + '/fonts/BlenderRegular.oft'));
@@ -115,16 +120,51 @@ app.get('*', handleRender);
 
 function handleRender(req, res) {
 
-//  console.log('Handler. Url: ' + req.url);
+  let locale = "he";
+
+  if( req.query.lang ) { // change default locale is passed in query string
+    locale = req.query.lang;
+  }
+  console.log("Locale: " + locale);
+
+  let messages = localeData[locale];
 
   const store = createStore(reducers);
 
-  store.dispatch(initCategories(categories));
-  store.dispatch(initMarkers(highlights));
+  const _categories = categories.map( (category, index) => {
+
+      let _category = {
+        card_image: category.card_image,
+        description: category.description[locale],
+        name: category.name[locale],
+        id: category.id
+      }
+
+      return _category;
+  });
+
+  const _markers = markers.map( (marker, index) => {
+
+      let _marker = {
+        imageUrl: marker.imageUrl,
+        text: marker.text[locale],
+        left: marker.left,
+        left_xs: marker.left_xs,
+        top: marker.top,
+        top_xs: marker.top_xs
+      };
+
+      return _marker;
+  });
+
+  store.dispatch(initCategories(_categories));
+  store.dispatch(initMarkers(_markers));
 
   const preloadedState = store.getState();
   const componentHTML = ReactDomServer.renderToString(<Provider store={store}>
-                                                        <App />
+                                                        <IntlProvider locale={locale} messages={messages}>
+                                                          <App />
+                                                        </IntlProvider>
                                                       </Provider>);
   //console.log(componentHTML);
 
