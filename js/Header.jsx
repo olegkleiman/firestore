@@ -11,7 +11,7 @@ class Header extends React.Component {
   }
 
   render() {
-    return (<div>
+    return (<div className='mdl-layout mdl-js-layout mdl-layout--fixed-header'>
               <header id="app_header" className={styles.headerWaterfall + ' mdl-layout__header mdl-layout__header--scroll'}
                       aria-haspopup="true" aria-label={this.props.intl.messages.main_menu}>
                   <div className='mdl-layout__header-row'>
@@ -24,7 +24,7 @@ class Header extends React.Component {
                       <div className='mdl-layout-spaces'></div>
                       <div className='mdl-layout-spaces'></div>
 
-                      <a className={styles.headerButton} href='/'>
+                      <a className={styles.headerButton} href="/?lang=en">
                         {this.props.intl.messages.language}
                       </a>
 
