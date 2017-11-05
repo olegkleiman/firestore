@@ -1,3 +1,19 @@
+.header__odsCaption___2dYV0 {
+  color: #FFFFFF !important;
+  text-decoration: none !important;
+}
+
+.header__headerButton___1_vxE {
+  font-family: "BlenderLight";
+  text-decoration: none !important;
+  padding-right: 12px !important;
+  color: white !important;
+  margin-right: 18px;
+}
+
+.header__headerWaterfall___30QS1 {
+  background-color: #2E2E2E;
+}
 .minimap__mapimage___210uR{
     background:url(images/city-full-banner.png) no-repeat;
     background-color:#186DB1;
