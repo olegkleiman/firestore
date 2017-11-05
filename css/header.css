@@ -1,0 +1,16 @@
+.odsCaption {
+  color: #FFFFFF !important;
+  text-decoration: none !important;
+}
+
+.headerButton {
+  font-family: "BlenderLight";
+  text-decoration: none !important;
+  padding-right: 12px !important;
+  color: white !important;
+  margin-right: 18px;
+}
+
+.headerWaterfall {
+  background-color: #2E2E2E;
+}
