@@ -1,4 +1,5 @@
 import React from 'react';
+import { injectIntl } from 'react-intl';
 
 class Marker extends React.Component {
 
@@ -8,10 +9,10 @@ class Marker extends React.Component {
 
   render() {
     return (<div>
-            {this.props.text.he}
+            {this.props.text}
             </div>);
   };
 
 };
 
-export default Marker;
+export default injectIntl(Marker);
