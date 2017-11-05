@@ -17,7 +17,7 @@ class Header extends React.Component {
                   <div className='mdl-layout__header-row'>
                       {/* Title */}
                       <span className='mdl-layout-title' role='banner'>
-                        <a href="#/" className={styles.odsCaption}>TLV OpenData</a>
+                        <a href="#/" className={styles.headerCaption}>TLV OpenData</a>
                       </span>
 
                       <div className='mdl-layout-spaces'></div>
