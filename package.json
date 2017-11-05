@@ -6,7 +6,13 @@
   "scripts": {
     "client:build": "webpack -d",
     "client:start": "webpack-dev-server -d --colors --watch",
+
+    "//": "For Windows, use",
+    "//": "set BABEL_ENV='server' && node --inspect --debug-brk hook.js",
     "server:debug": "BABEL_ENV=server node --inspect --debug-brk hook.js",
+
+    "//": "For Windows, use ",
+    "//": "set BABEL_DISABLE_CACHE='1' set BABEL_ENV='server' && nodemon hook.js",
     "server:start": "BABEL_DISABLE_CACHE=1 BABEL_ENV=server nodemon hook.js"
   },
   "author": "Oleg Kleiman",
