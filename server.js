@@ -101,20 +101,23 @@ function initMarkers(markers) {
 app.get('/styles.css', (req, res) => {
   res.sendFile(__dirname + '/assets/styles.css');
 });
+app.use(express.static('css'));
+//app.use(express.static('images'));
+app.use(express.static('fonts'));
 app.get('/images/city-full-banner.png', (req, res) => {
   res.sendFile(__dirname + '/images/city-full-banner.png')
 });
 app.get('/favicon.ico', (req, res) => {
   res.sendFile(path.join(__dirname + '/favicon.ico'));
 });
-app.get('/fonts/BlenderRegular.oft', (req, res) => {
-  console.log('Font requested');
-  res.sendFile(path.join(__dirname + '/fonts/BlenderRegular.oft'));
-});
-app.get('/fonts/BlenderLight.oft', (req, res) => {
-  console.log('Light Font requested');
-  res.sendFile(path.join(__dirname + '/fonts/BlenderLight.oft'));
-})
+// app.get('/fonts/BlenderRegular.oft', (req, res) => {
+//   console.log('Font requested');
+//   res.sendFile(path.join(__dirname + '/fonts/BlenderRegular.oft'));
+// });
+// app.get('/fonts/BlenderLight.oft', (req, res) => {
+//   console.log('Light Font requested');
+//   res.sendFile(path.join(__dirname + '/fonts/BlenderLight.oft'));
+// })
 
 app.get('*', handleRender);
 
