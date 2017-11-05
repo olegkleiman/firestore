@@ -1,10 +1,14 @@
 {
   "en": {
+    "language": "עברית",
     "categories": "Categories",
-    "beta": "It's beta"
+    "beta": "It's beta",
+    "main_menu": "תפריט ראשי"
   },
   "he": {
+    "language": "English",
     "categories": "קטגוריות",
-    "beta": "אתר בהרצה"
+    "beta": "אתר בהרצה",
+    "main_menu": "Main Menu"
   }
 }
