@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { injectIntl } from 'react-intl';
 
 class Category extends React.Component {
 
@@ -35,11 +36,11 @@ class Category extends React.Component {
 
     return (<div onClick={this.categorySelected} className='mdl-cell mdl-cell--4-col-desktop mdl-cell--12-col-phone'>
               <div className='mdl-cell mdl-cell--9-col-desktop mdl-cell--3-col-phone'>
-                <h3 className='k-category'>{this.props.name.he}</h3>
+                <h3 className='k-category'>{this.props.name}</h3>
               </div>
             </div>);
   }
 
 };
 
-export default connect()(Category);
+export default connect()(injectIntl(Category));
