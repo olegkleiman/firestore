@@ -1,4 +1,4 @@
-export default ({content, state}) => {
+export default ({content, state, language}) => {
   return `
       <!DOCTYPE html>
       <html dir="rtl" lang="he">
@@ -17,7 +17,7 @@ export default ({content, state}) => {
         <script>
           window.__PRELOADED_STATE__ = ${JSON.stringify(state)};
         </script>
-        <script src="http://localhost:8080/bundle.js"></script>
+        <script id='bundle' src="http://localhost:8080/bundle.js" lang='${language}'></script>
       </body>
       </html>
   `;
