@@ -11,7 +11,10 @@ import he from 'react-intl/locale-data/he';
 
 import localeData from './assets/messages/messages.json';
 
-const locale = "he";
+// Detect locale as an attribute passed to <script> tag
+const scriptElement = document.getElementById('bundle');
+const locale = scriptElement.getAttribute('lang');
+
 const messages = localeData[locale];
 addLocaleData([...en, ...he]);
 
