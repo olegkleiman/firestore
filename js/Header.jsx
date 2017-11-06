@@ -33,6 +33,29 @@ class Header extends React.Component {
 
                   </div>
               </header>
+              <nav className='mdl-layout__drawer' role='navigation'>
+                <div className='mdl-grid mdl-layout-title'>
+                  <div>
+                    <h2>
+                      TLV OpenData
+                    </h2>
+                  </div>
+                  <div>
+                    <button>
+                      <i>close</i>
+                    </button>
+                  </div>
+                </div>
+
+                <ul>
+                  <li className='mdl-navigation'>
+                    <a className='mdl-navigation__link mdl-textfield' href='#/'>
+                      <i>home</i>
+                    </a>
+                  </li>
+                </ul>
+
+              </nav>
             </div>);
   }
 
