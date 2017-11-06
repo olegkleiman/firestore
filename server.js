@@ -128,7 +128,6 @@ function handleRender(req, res) {
   if( req.query.lang ) { // change default locale is passed in query string
     locale = req.query.lang;
   }
-  console.log("Locale: " + locale);
 
   let messages = localeData[locale];
 
@@ -175,6 +174,7 @@ function handleRender(req, res) {
   const html = template({
     content: componentHTML,
     state: preloadedState,
+    language: locale
   });
   res.status(200).send(html);
   //res.end(renderHTML(componentHTML, preloadedState));
