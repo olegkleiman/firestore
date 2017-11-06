@@ -11,6 +11,11 @@ class Header extends React.Component {
   }
 
   render() {
+
+    const locale = '/?lang=' + this.props.intl.messages.alt_language;
+    console.log('Locale: ' + locale);
+    //'/?lang=en'
+
     return (<div className='mdl-layout mdl-js-layout mdl-layout--fixed-header'>
               <header id="app_header" className={styles.headerWaterfall + ' mdl-layout__header mdl-layout__header--scroll'}
                       aria-haspopup="true" aria-label={this.props.intl.messages.main_menu}>
@@ -24,7 +29,7 @@ class Header extends React.Component {
                       <div className='mdl-layout-spaces'></div>
                       <div className='mdl-layout-spaces'></div>
 
-                      <a className={styles.headerButton} href="/?lang=en">
+                      <a className={styles.headerButton} href={locale}>
                         {this.props.intl.messages.language}
                       </a>
 
