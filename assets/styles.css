@@ -1,4 +1,4 @@
-.header__odsCaption___2dYV0 {
+.header__headerCaption___2GRsf {
   color: #FFFFFF !important;
   text-decoration: none !important;
 }
@@ -25,4 +25,22 @@
   position: absolute;
   left: 2%;
   color: yellow;
+}
+.footer__background___3wIUI {
+  background: url(images/footerHe.png) no-repeat 0px bottom;
+  background-size: auto;
+  height: 85px;
+  margin: 16px 0px 16px 16px;
+}
+
+.footer__copyright___3Y1Xw {
+  padding-right: 20px;
+  position: relative;
+  top: -70px;
+}
+
+.footer__copyright___3Y1Xw p {
+  color: white;
+  margin: 0 0 10px;
+  font-size: 16px;
 }
