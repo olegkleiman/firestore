@@ -13,8 +13,6 @@ class Header extends React.Component {
   render() {
 
     const locale = '/?lang=' + this.props.intl.messages.alt_language;
-    console.log('Locale: ' + locale);
-    //'/?lang=en'
 
     return (<div className='mdl-layout mdl-js-layout mdl-layout--fixed-header'>
               <header id="app_header" className={styles.headerWaterfall + ' mdl-layout__header mdl-layout__header--scroll'}
