@@ -1,0 +1,18 @@
+.item {
+  border-bottom: 1px solid rgb(236, 236, 236);
+}
+
+.itemText {
+    color: #444;
+    font-size:20px;
+    /*padding-top: 20px;*/
+}
+
+.itemImage {
+  background: url(../images/analytic-small.png);
+  background-repeat:no-repeat;
+  background-size:contain;
+  background-position:center;
+  width:29px;
+  height:24px;
+}
