@@ -1,14 +1,27 @@
 {
   "en": {
     "language": "עברית",
+    "alt_language": "he",
     "categories": "Categories",
     "beta": "It's beta",
-    "main_menu": "תפריט ראשי"
+    "main_menu":  "Main Menu",
+    "home": "Home",
+    "allDatasets": "All Datasets",
+    "faq": "FAQ",
+    "developers": "Developers",
+    "welcome": "Welcome to TLV OpenData",
+    "popularDatasets": "Popular Datasets"
   },
   "he": {
     "language": "English",
+    "alt_language": "en",
     "categories": "קטגוריות",
     "beta": "אתר בהרצה",
-    "main_menu": "Main Menu"
+    "main_menu": "תפריט ראשי",
+    "home": "ראשי",
+    "allDatasets": "כל המאגרים",
+    "developers": "מפתחים",
+    "welcome": "ברוכים הבאים לאתר TLV OpenData",
+    "popularDatasets": "מאגרים פופולריים"
   }
 }
