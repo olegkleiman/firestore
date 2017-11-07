@@ -40,20 +40,29 @@ var db = admin.firestore();
 
 const categories = [];
 const markers = [];
+const promotions = [];
 
 console.log('Getting data from Firestore');
 
 var p1 = db.collection('categories').get();
-var p2 = db.collection('highlights').get()
-Promise.all([p1,p2])
+var p2 = db.collection('highlights').get();
+var p3 = db.collection('datasets')
+            .where('isPromoted', '==', true)
+            .get();
+Promise.all([p1,p2,p3])
   .then( values => {
 
     values[0].forEach( (doc) => {
-      categories.push(doc.data());
+      let _data = doc.data();
+      categories.push(_data);
     });
 
     values[1].forEach( (doc) => {
       markers.push(doc.data());
+    });
+
+    values[2].forEach( (doc) => {
+      promotions.push(doc.data());
     });
 
     app.listen(PORT, () => {
@@ -79,6 +88,13 @@ function initMarkers(markers) {
   }
 };
 
+function initPromotions(promotions) {
+  return {
+    type: 'PROMOTIONS_INIT',
+    data: promotions
+  }
+}
+
 app.use(express.static('assets'));
 app.use(express.static('css'));
 
@@ -100,7 +116,7 @@ function handleRender(req, res) {
 
   const store = createStore(reducers);
 
-  const _categories = categories.map( (category, index) => {
+  const _categories = categories.map( (category) => {
 
       let _category = {
         card_image: category.card_image,
@@ -112,7 +128,7 @@ function handleRender(req, res) {
       return _category;
   });
 
-  const _markers = markers.map( (marker, index) => {
+  const _markers = markers.map( (marker) => {
 
       let _marker = {
         imageUrl: marker.imageUrl,
@@ -126,8 +142,15 @@ function handleRender(req, res) {
       return _marker;
   });
 
+  const _promotions = promotions.map( (p) => {
+      return {
+          name: p.name[locale]
+      };
+  });
+
   store.dispatch(initCategories(_categories));
   store.dispatch(initMarkers(_markers));
+  store.dispatch(initPromotions(_promotions));
 
   const preloadedState = store.getState();
   const componentHTML = ReactDomServer.renderToString(<Provider store={store}>
