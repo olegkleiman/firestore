@@ -26,20 +26,40 @@
   left: 2%;
   color: yellow;
 }
-.footer__background___3wIUI {
+.footer__heBackground___kO5GW {
   background: url(images/footerHe.png) no-repeat 0px bottom;
   background-size: auto;
   height: 85px;
   margin: 16px 0px 16px 16px;
 }
 
-.footer__copyright___3Y1Xw {
+.footer__enBackground___38qx3 {
+  background: url(images/footerEn.png) no-repeat 0px bottom;
+  background-size: auto;
+  height: 85px;
+  margin: 16px 0px 16px 16px;
+}
+
+.footer__heCopyright___2SzV9 {
   padding-right: 20px;
   position: relative;
   top: -70px;
 }
 
-.footer__copyright___3Y1Xw p {
+.footer__heCopyright___2SzV9 p {
+  color: white;
+  margin: 0 0 10px;
+  font-size: 16px;
+}
+
+.footer__enCopyright___DeKsJ {
+  padding-right: 20px;
+  position: relative;
+  float: right;
+  top: -70px;
+}
+
+.footer__enCopyright___DeKsJ p {
   color: white;
   margin: 0 0 10px;
   font-size: 16px;
