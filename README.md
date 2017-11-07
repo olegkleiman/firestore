@@ -1,2 +1,2 @@
 # firestore
-React Server Side Rendering + React Client Rendering of Firestore documents.
+React Server Side Rendering + React Client Rendering for Firestore documents.
