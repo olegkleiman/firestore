@@ -7,6 +7,7 @@ const update = (state, mutations) => {
 const INITIAL_STATE = {
   categories: [],
   markers: [],
+  promotions: [],
   selectedCategory: 0
 };
 
@@ -25,6 +26,12 @@ const reducers = (state = INITIAL_STATE, action) => {
       return {
           ...state,
           markers: state.markers.concat(action.data)
+      };
+
+    case 'PROMOTIONS_INIT':
+      return {
+        ...state,
+        promotions: state.promotions.concat(action.data)
       };
 
     case 'CATEGORY_CHANGED':
