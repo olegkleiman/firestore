@@ -37,7 +37,15 @@ var config = {
             })
       },
       { test: /\.(woff|woff2|ttt|eot|otf)/, loader: 'url-loader?limit=1' },
-      { test: /\.png/, loader: 'url-loader?limit=10000&mimetype=image/png' },
+      {
+        test: /\.png/,
+        //loader: 'url-loader?limit=10000&mimetype=image/png',
+        loader: 'file-loader',
+        query: {
+          name: 'images/[hash].[ext]',
+          publicPath: '/'
+        }
+      },
       { test: /\.svg/, loader: 'url-loader?limit=26000&mimetype=svg+xml' }
     ]
   },
