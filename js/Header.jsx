@@ -14,8 +14,7 @@ class Header extends React.Component {
 
     const locale = '/?lang=' + this.props.intl.messages.alt_language;
 
-    return (<div className='mdl-layout mdl-js-layout mdl-layout--fixed-header'>
-              <header id="app_header" className={styles.headerWaterfall + ' mdl-layout__header mdl-layout__header--scroll'}
+    return (<header id="app_header" className={styles.headerWaterfall + ' mdl-layout__header mdl-layout__header--scroll'}
                       aria-haspopup="true" aria-label={this.props.intl.messages.main_menu}>
                   <div className='mdl-layout__header-row'>
                       {/* Title */}
@@ -27,36 +26,25 @@ class Header extends React.Component {
                       <div className='mdl-layout-spaces'></div>
                       <div className='mdl-layout-spaces'></div>
 
+                      <div className='mdh-expandable-search mdl-cell--hide-desktop mdl-cell--hide-tablet'>
+                        <i className={styles.white + 'material-icons'}>
+                          search
+                        </i>
+                      </div>
+
                       <a className={styles.headerButton} href={locale}>
                         {this.props.intl.messages.language}
                       </a>
 
                   </div>
+
+                  <div className='mdl-layout__header-row mdl-cell--hide-desktop mdl-cell--hide-tablet'>
+                    <div className='mdh-expandable-search'>
+                        <input id='mobileSearchBox' />
+                    </div>
+                  </div>
               </header>
-              <nav className='mdl-layout__drawer' role='navigation'>
-                <div className='mdl-grid mdl-layout-title'>
-                  <div>
-                    <h2>
-                      TLV OpenData
-                    </h2>
-                  </div>
-                  <div>
-                    <button>
-                      <i>close</i>
-                    </button>
-                  </div>
-                </div>
-
-                <ul>
-                  <li className='mdl-navigation'>
-                    <a className='mdl-navigation__link mdl-textfield' href='#/'>
-                      <i>home</i>
-                    </a>
-                  </li>
-                </ul>
-
-              </nav>
-            </div>);
+            );
   }
 
 };
