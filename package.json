@@ -6,7 +6,7 @@
   "scripts": {
     "client:build": "webpack -d",
     "client:start": "webpack-dev-server -d --colors --watch",
-
+    
     "//": "For Windows, use",
     "//": "set BABEL_ENV='server' && node --inspect-brk hook.js",
     "server:debug": "BABEL_ENV=server node --inspect-brk hook.js",
@@ -25,6 +25,7 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
+    "classnames": "^2.2.5",
     "express": "^4.16.2",
     "file-loader": "^1.1.5",
     "firebase": "^4.6.0",
