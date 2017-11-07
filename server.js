@@ -107,6 +107,12 @@ app.use(express.static('fonts'));
 app.get('/images/city-full-banner.png', (req, res) => {
   res.sendFile(__dirname + '/images/city-full-banner.png')
 });
+app.get('/images/footerHe.png', (req, res) => {
+  res.sendFile(__dirname + '/images/footerHe.png')
+});
+app.get('/images/footerEn.png', (req, res) => {
+  res.sendFile(__dirname + '/images/footerEn.png')
+});
 app.get('/favicon.ico', (req, res) => {
   res.sendFile(path.join(__dirname + '/favicon.ico'));
 });
