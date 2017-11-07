@@ -28,6 +28,7 @@ const preloadedState = window.__PRELOADED_STATE__;
 if( preloadedState ) {
     const categories = preloadedState.categories;
     const markers = preloadedState.markers;
+    const promotions = preloadedState.promotions;
 
     // Allow the passed state to be garbage-collected
     delete window.__PRELOADED_STATE__;
@@ -39,6 +40,10 @@ if( preloadedState ) {
     store.dispatch({
         type: 'MARKERS_INIT',
         data: markers
+    });
+    store.dispatch({
+        type: 'PROMOTIONS_INIT',
+        data: promotions
     });
 }
 
