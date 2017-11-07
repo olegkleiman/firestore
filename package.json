@@ -13,7 +13,9 @@
 
     "//": "For Windows, use ",
     "//": "set BABEL_DISABLE_CACHE='1' && set BABEL_ENV='server' && nodemon hook.js",
-    "server:start": "BABEL_DISABLE_CACHE=1 BABEL_ENV=server nodemon hook.js"
+    "server:start": "BABEL_DISABLE_CACHE=1 BABEL_ENV=server nodemon hook.js",
+    
+    "server:pilot": "nodemon pilot.js"
   },
   "author": "Oleg Kleiman",
   "license": "ISC",
