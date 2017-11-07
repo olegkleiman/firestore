@@ -79,51 +79,12 @@ function initMarkers(markers) {
   }
 };
 
-// console.log('Reading CSS');
-// let style = {};
-//
-// const cssPath = './assets/styles.css';
-// if( fs.existsSync(cssPath) ) {
-//   fs.readFile(cssPath, 'utf8', function(err, data){
-//
-//     style = data.toString();
-//
-//     if( err ) {
-//       console.log('Error: ' + err);
-//     } else {
-//       console.log('CSS: ' + style);
-//     }
-//   });
-// } else {
-//   console.log('No CSS file found at ' + cssPath);
-// }
-
-app.get('/styles.css', (req, res) => {
-  res.sendFile(__dirname + '/assets/styles.css');
-});
+app.use(express.static('assets'));
 app.use(express.static('css'));
-//app.use(express.static('images'));
-app.use(express.static('fonts'));
-app.get('/images/city-full-banner.png', (req, res) => {
-  res.sendFile(__dirname + '/images/city-full-banner.png')
-});
-app.get('/images/footerHe.png', (req, res) => {
-  res.sendFile(__dirname + '/images/footerHe.png')
-});
-app.get('/images/footerEn.png', (req, res) => {
-  res.sendFile(__dirname + '/images/footerEn.png')
-});
+
 app.get('/favicon.ico', (req, res) => {
   res.sendFile(path.join(__dirname + '/favicon.ico'));
 });
-// app.get('/fonts/BlenderRegular.oft', (req, res) => {
-//   console.log('Font requested');
-//   res.sendFile(path.join(__dirname + '/fonts/BlenderRegular.oft'));
-// });
-// app.get('/fonts/BlenderLight.oft', (req, res) => {
-//   console.log('Light Font requested');
-//   res.sendFile(path.join(__dirname + '/fonts/BlenderLight.oft'));
-// })
 
 app.get('*', handleRender);
 
@@ -131,7 +92,7 @@ function handleRender(req, res) {
 
   let locale = "he";
 
-  if( req.query.lang ) { // change default locale is passed in query string
+  if( req.query.lang ) { // change default locale as is passed in query string
     locale = req.query.lang;
   }
 
@@ -176,15 +137,12 @@ function handleRender(req, res) {
                                                       </Provider>);
   //console.log(componentHTML);
 
-  // res.sendFile(__dirname + '/index.html');
   const html = template({
     content: componentHTML,
     state: preloadedState,
     language: locale
   });
   res.status(200).send(html);
-  //res.end(renderHTML(componentHTML, preloadedState));
-
 };
 
 // function handleRender(req, res) {
