@@ -3,6 +3,8 @@ import ReactDOM   from 'react-dom';
 import { Router, browserHistory, Route, IndexRoute } from 'react-router';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
+
+import routes from './routes.jsx';
 import reducers from './reducers.jsx';
 
 import { IntlProvider, addLocaleData } from 'react-intl';
@@ -19,6 +21,8 @@ const messages = localeData[locale];
 addLocaleData([...en, ...he]);
 
 import App from './js/App.jsx';
+import Dataset from './js/Dataset.jsx';
+import DefaultLayout from './js/DefaultLayout.jsx';
 
 const store = createStore(reducers,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
@@ -49,9 +53,7 @@ if( preloadedState ) {
 
 ReactDOM.hydrate(<Provider store={store}>
                     <IntlProvider locale={locale} messages={messages}>
-                      <Router history={browserHistory}>
-                          <Route path='/' component={App} />
-                      </Router>
+                        <Router routes={routes} history={browserHistory} />
                     </IntlProvider>
                  </Provider>,
                 document.getElementById('app'));
