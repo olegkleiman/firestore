@@ -5,11 +5,11 @@ import fs               from 'fs';
 import React            from 'react';
 import ReactDomServer   from 'react-dom/server';
 import { Router, hashHistory, Route, IndexRoute } from 'react-router';
+import { match, RouterContext } from 'react-router';
 import { createStore }  from 'redux';
 import { Provider }     from 'react-redux';
 import admin            from 'firebase-admin';
 
-import { match, RouterContext } from 'react-router';
 import routes from './routes.jsx';
 
 import { addLocaleData, IntlProvider } from 'react-intl';
@@ -97,6 +97,7 @@ function initPromotions(promotions) {
 
 app.use(express.static('assets'));
 app.use(express.static('css'));
+app.use(express.static('fonts'));
 
 app.get('/favicon.ico', (req, res) => {
   res.sendFile(path.join(__dirname + '/favicon.ico'));
@@ -106,89 +107,69 @@ app.get('*', handleRender);
 
 function handleRender(req, res) {
 
-  let locale = "he";
+   let locale = "he";
 
-  if( req.query.lang ) { // change default locale as is passed in query string
-    locale = req.query.lang;
-  }
+   if( req.query.lang ) { // change default locale as is passed in query string
+     locale = req.query.lang;
+   }
 
-  let messages = localeData[locale];
+   console.log('Handler. Url: ' + req.url);
 
-  const store = createStore(reducers);
+   match({ routes: routes, location: req.url },
+     (err, redirect, props) => {
+        console.log('Match callback. Props: ' + props.location.pathname + ' Redirect: ' + redirect + ' err: ' + err);
 
-  const _categories = categories.map( (category) => {
+        let messages = localeData[locale];
+        const store = createStore(reducers);
 
-      let _category = {
-        card_image: category.card_image,
-        description: category.description[locale],
-        name: category.name[locale],
-        id: category.id
-      }
+        const _categories = categories.map( (category) => {
 
-      return _category;
-  });
+          let _category = {
+              card_image: category.card_image,
+              description: category.description[locale],
+              name: category.name[locale],
+              id: category.id
+          }
 
-  const _markers = markers.map( (marker) => {
+          return _category;
+       });
 
-      let _marker = {
-        imageUrl: marker.imageUrl,
-        text: marker.text[locale],
-        left: marker.left,
-        left_xs: marker.left_xs,
-        top: marker.top,
-        top_xs: marker.top_xs
-      };
+       const _markers = markers.map( (marker) => {
 
-      return _marker;
-  });
+          let _marker = {
+            imageUrl: marker.imageUrl,
+            text: marker.text[locale],
+            left: marker.left,
+            left_xs: marker.left_xs,
+            top: marker.top,
+            top_xs: marker.top_xs
+          };
 
-  const _promotions = promotions.map( (p) => {
-      return {
-          name: p.name[locale]
-      };
-  });
+          return _marker;
+      });
 
-  store.dispatch(initCategories(_categories));
-  store.dispatch(initMarkers(_markers));
-  store.dispatch(initPromotions(_promotions));
+      const _promotions = promotions.map( (p) => {
+          return {
+              name: p.name[locale]
+          };
+      });
 
-  const preloadedState = store.getState();
-  const componentHTML = ReactDomServer.renderToString(<Provider store={store}>
-                                                        <IntlProvider locale={locale} messages={messages}>
-                                                          <App />
-                                                        </IntlProvider>
-                                                      </Provider>);
-  //console.log(componentHTML);
+      store.dispatch(initCategories(_categories));
+      store.dispatch(initMarkers(_markers));
+      store.dispatch(initPromotions(_promotions));
 
-  const html = template({
-    content: componentHTML,
-    state: preloadedState,
-    language: locale
-  });
-  res.status(200).send(html);
-};
+      const preloadedState = store.getState();
+      const componentHTML = ReactDomServer.renderToString(<Provider store={store}>
+                                                              <IntlProvider locale={locale} messages={messages}>
+                                                                  <RouterContext {...props} />
+                                                              </IntlProvider>
+                                                          </Provider>);
+      const html = template({
+        content: componentHTML,
+        state: preloadedState,
+        language: locale
+      });
+      res.status(200).send(html);
+    });
 
-// function handleRender(req, res) {
-//
-//   console.log('Handler. Url: ' + req.url);
-//
-//   match({ routes: routes, location: req.url }, (err, redirect, renderProps) => {
-//     console.log('Match callback. Props: ' + renderProps.location.pathname + ' Redirect: ' + redirect + ' err: ' + err);
-//
-//     const store = createStore(reducers);
-//
-//     store.dispatch(initCategories(categories));
-//     store.dispatch(initMarkers(highlights));
-//
-//     const preloadedState = store.getState();
-//     // const componentHTML = ReactDomServer.renderToString(<Provider store={store}>
-//     //                                                       <Router routes={routes} history={hashHistory}>
-//     //                                                       </Router>
-//     //                                                     </Provider>);
-//     const componentHTML = ReactDomServer.renderToString(<Provider store={store}>
-//                                                           <RouterContext {...renderProps} />
-//                                                         </Provider>)
-//     return res.end(renderHTML(componentHTML, preloadedState));
-//   });
-//
-// };
+ };
