@@ -113,11 +113,11 @@ function handleRender(req, res) {
      locale = req.query.lang;
    }
 
-   console.log('Handler. Url: ' + req.url);
+   //console.log('Handler. Url: ' + req.url);
 
    match({ routes: routes, location: req.url },
      (err, redirect, props) => {
-        console.log('Match callback. Props: ' + props.location.pathname + ' Redirect: ' + redirect + ' err: ' + err);
+        //console.log('Match callback. Props: ' + props.location.pathname + ' Redirect: ' + redirect + ' err: ' + err);
 
         let messages = localeData[locale];
         const store = createStore(reducers);
