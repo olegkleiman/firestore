@@ -4,3 +4,24 @@
     /*margin: 0px 25px 0px 0px;*/
     width: 100%;
 }
+
+.caption {
+  font-size: 28px;
+  color: #444;
+  font-family: BlenderLight;
+  font-weight: 300;
+  -webkit-margin-before: 0px;
+}
+
+.title {
+  font-size: 36px;
+  font-family: 'BlenderLight';
+  color: #444;
+  -webkit-margin-before: 0px;
+}
+
+.text {
+  color: #444;
+  font-size: 20px;
+  padding-top: 20px;
+}
