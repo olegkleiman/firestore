@@ -33,7 +33,7 @@ class Dashboard extends React.Component {
               <div className='mdl-cell mdl-cell--stretch mdl-cell--4-col mdl-cell--12-col-tablet'>
                 <div className='mdl-grid'>
                   <div className={styles.band}>
-                    <h2 className='mdl-cell mdl-cell--12-col'>{this.props.intl.messages.popularDatasets}</h2>
+                    <h2 className={styles.caption + 'mdl-cell mdl-cell--12-col'}>{this.props.intl.messages.popularDatasets}</h2>
                     {this.props.promotions.map( (promo, index) => {
                         return <Promotion key={index} name={promo.name} {...this.props} />
                       })}
